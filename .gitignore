@@ -1,0 +1,14 @@
+# Python
+backend/venv/
+
+# Node
+frontend/node_modules/
+frontend/.next/
+
+# Env files
+.env
+backend/.env
+frontend/.env
+
+# Mac junk
+.DS_Store
