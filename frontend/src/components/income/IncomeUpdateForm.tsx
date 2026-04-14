@@ -58,7 +58,7 @@ export default function IncomeUpdateForm({ onBack }: IncomeUpdateProps) {
         {streams.map((stream, index) => (
           <div key={stream.id} className="flex gap-3 mb-4 p-3 rounded-lg border border-slate-700 bg-slate-700/30 text-left">
             <div className="flex-1">
-              <label className={incomeStyles.label}>Amount</label>
+              <label className={`${incomeStyles.label} pl-2`}>Amount</label>
               <input
                 type="number"
                 className={incomeStyles.input}
@@ -67,7 +67,7 @@ export default function IncomeUpdateForm({ onBack }: IncomeUpdateProps) {
               />
             </div>
             <div className="flex-[2]">
-              <label className={incomeStyles.label}>Source</label>
+              <label className={`${incomeStyles.label} pl-2`}>Source</label>
               <input
                 type="text"
                 className={incomeStyles.input}

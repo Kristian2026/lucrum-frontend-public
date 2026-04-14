@@ -38,7 +38,7 @@ export default function Home() {
 
   return (
     <main className={`${incomeStyles.pageWrapper} flex flex-col items-center min-h-screen w-full`}>
-      <div style={{ width: "100%", padding: "20px 0 20px 0", textAlign: "center" }}>
+      <div style={{ width: "100%", padding: "5px 0 20px 0", textAlign: "center" }}>
         <h1 className="text-4xl font-bold text-white mb-2">Lucrum</h1>
         <p className="text-slate-400 mb-10">Your personal budget manager.</p>
       </div>
