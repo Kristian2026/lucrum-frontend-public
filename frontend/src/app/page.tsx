@@ -1,79 +1,66 @@
 "use client";
 
 import { useState } from "react";
-import IncomeForm from "@/components/income/IncomeForm";
-import IncomeDisplay from "@/components/income/IncomeDisplay";
-import IncomeUpdateForm from "@/components/income/IncomeUpdateForm";
+import CenterSideBySideIncome from "@/components/income/FinalIncome";
+import AllocationManagement from "@/components/allocation/FinalAllocation";
 import { incomeStyles } from "@/styles/income";
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [viewState, setViewState] = useState<"input" | "view" | "update">("input");
+
+  const handleSignOut = () => {
+    setIsLoggedIn(false);
+    window.location.href = "/account-signout";
+  };
 
   if (!isLoggedIn) {
     return (
-      <main className={`${incomeStyles.pageWrapper} flex flex-col items-center justify-center min-h-screen w-full text-center p-6`}>
-        <h1 className="text-4xl font-bold text-white mb-4">Welcome to Lucrum</h1>
-        <p className="text-slate-400 mb-8 max-w-md">
-          Please log in to your account to manage your budget and view your income.
+      <main
+        className={`${incomeStyles.pageWrapper} min-h-screen w-full flex flex-col items-center justify-center px-6 text-center`}
+      >
+        <h1 className="mb-4 text-4xl font-bold text-white">Welcome to Lucrum</h1>
+        <p className="mb-8 max-w-md text-slate-400">
+          Please log in to your account to manage your budget and view your
+          income.
         </p>
-        <div className="flex flex-col items-center gap-4">
-          <a 
-            href="/account-creation" 
-            className="px-8 py-3 bg-emerald-600 text-white rounded-lg font-bold hover:bg-emerald-500 transition-colors"
-          >
-            Go to Account Creation
-          </a>
-          <button 
-            type="button"
-            onClick={() => setIsLoggedIn(true)}
-            className="mt-12 text-slate-600 text-xs hover:text-slate-400 transition-colors"
-          >
-            (Bypass Login)
-          </button>
-        </div>
+
+        <a
+          href="/account-creation"
+          className="rounded-lg bg-emerald-600 px-8 py-3 font-bold text-white transition-colors hover:bg-emerald-500"
+        >
+          Go to Account Creation
+        </a>
       </main>
     );
   }
 
   return (
-    <main className={`${incomeStyles.pageWrapper} flex flex-col items-center min-h-screen w-full`}>
-      <div style={{ width: "100%", padding: "5px 0 20px 0", textAlign: "center" }}>
-        <h1 className="text-4xl font-bold text-white mb-2">Lucrum</h1>
-        <p className="text-slate-400 mb-10">Your personal budget manager.</p>
+    <main
+      className={`${incomeStyles.pageWrapper} min-h-screen w-full flex flex-col items-center bg-slate-950 text-white`}
+    >
+      <div className="w-full max-w-7xl px-6 py-10">
+        <header className="mb-12 text-center">
+          <h1 className="mb-2 text-4xl font-bold text-white">Lucrum</h1>
+          <p className="text-slate-400">Your personal budget manager.</p>
+        </header>
+
+        <section className="mb-16">
+          <CenterSideBySideIncome />
+        </section>
+
+        <section className="mb-16">
+          <AllocationManagement />
+        </section>
+
+        <div className="pt-4 text-center">
+          <button
+            onClick={handleSignOut}
+            className="text-sm text-slate-500 transition-colors hover:text-white"
+          >
+            Sign Out
+          </button>
+        </div>
       </div>
-
-      <div className="flex flex-col items-center w-full max-w-2xl px-6">
-        
-        {viewState === "input" && (
-          <div className="w-full flex flex-col items-center">
-            <IncomeForm onSuccess={() => setViewState("view")} />
-          </div>
-        )}
-
-        {viewState === "view" && (
-          <div className="w-full flex flex-col items-center text-center">
-            <IncomeDisplay onSwitchToUpdate={() => setViewState("update")}/>
-          </div>
-        )}
-
-        {viewState === "update" && (
-          <div className="w-full flex flex-col items-center text-center">
-            <IncomeUpdateForm onBack={() => setViewState("view")} />
-          </div>
-        )}
-
-      </div>
-
-      <div style={{ width: "100%", padding: "80px 0", textAlign: "center" }}>
-        <button 
-          onClick={() => setIsLoggedIn(false)}
-          className="text-slate-500 hover:text-white text-sm transition-colors"
-        >
-          Sign Out
-        </button>
-      </div>
-
     </main>
   );
 }
